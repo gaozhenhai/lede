@@ -39,7 +39,7 @@ jobs:
 
       - name: Update feeds
         run: |
-          echo "src-git gaozh https://github.com/gaozhenhai/openwrt-packages" >> feeds.conf.default
+          echo "src-git gaozh https://github.com/mel3c/openwrt-packages" >> feeds.conf.default
 
           ./scripts/feeds update -a
           ./scripts/feeds install -a
