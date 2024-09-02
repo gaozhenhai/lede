@@ -91,7 +91,6 @@ jobs:
           CONFIG_PACKAGE_MAC80211_DEBUGFS=y
           CONFIG_PACKAGE_MAC80211_MESH=y
           # CONFIG_PACKAGE_UnblockNeteaseMusic-Go is not set
-          CONFIG_PACKAGE_acme=y
           CONFIG_PACKAGE_acpid=y
           CONFIG_PACKAGE_ahcpd=y
           CONFIG_PACKAGE_appfilter=y
@@ -113,7 +112,6 @@ jobs:
           CONFIG_PACKAGE_coreutils-nohup=y
           CONFIG_PACKAGE_coreutils-timeout=y
           CONFIG_PACKAGE_docker=y
-          CONFIG_PACKAGE_docker-compose=y
           CONFIG_PACKAGE_dockerd=y
           # CONFIG_PACKAGE_etherwake is not set
           CONFIG_PACKAGE_gdisk=y
@@ -122,12 +120,10 @@ jobs:
           CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
           CONFIG_PACKAGE_iptables-mod-ipopt=y
           # CONFIG_PACKAGE_iptables-mod-ipsec is not set
-          CONFIG_PACKAGE_iputils-arping=y
           CONFIG_PACKAGE_ipv6helper=y
           CONFIG_PACKAGE_iw=y
           CONFIG_PACKAGE_iwinfo=y
           CONFIG_PACKAGE_iwlwifi-firmware-ax210=y
-          CONFIG_PACKAGE_jq=y
           CONFIG_PACKAGE_kmod-br-netfilter=y
           CONFIG_PACKAGE_kmod-cfg80211=y
           # CONFIG_PACKAGE_kmod-crypto-cbc is not set
@@ -189,13 +185,13 @@ jobs:
           CONFIG_PACKAGE_libwebp=y
           CONFIG_PACKAGE_libyaml=y
           CONFIG_PACKAGE_lsblk=y
-          CONFIG_PACKAGE_luci-app-acme=y
+          # CONFIG_PACKAGE_luci-app-adguardhome_INCLUDE_binary is not set
           CONFIG_PACKAGE_luci-app-ahcp=y
           CONFIG_PACKAGE_luci-app-attendedsysupgrade=y
+          # CONFIG_PACKAGE_luci-app-ddns is not set
           CONFIG_PACKAGE_luci-app-dockerman=y
           CONFIG_PACKAGE_luci-app-eqos=y
           # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
-          CONFIG_PACKAGE_luci-app-mail=y
           CONFIG_PACKAGE_luci-app-netdata=y
           CONFIG_PACKAGE_luci-app-oaf=y
           CONFIG_PACKAGE_luci-app-omcproxy=y
@@ -204,7 +200,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-ramfree=y
           # CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-ng is not set
           # CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-webui is not set
-          CONFIG_PACKAGE_luci-app-serverchan=y
           CONFIG_PACKAGE_luci-app-socat=y
           CONFIG_PACKAGE_luci-app-statistics=y
           CONFIG_PACKAGE_luci-app-udpxy=y
@@ -219,11 +214,9 @@ jobs:
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
           # CONFIG_PACKAGE_luci-app-xlnetacc is not set
           # CONFIG_PACKAGE_luci-app-zerotier is not set
-          CONFIG_PACKAGE_luci-i18n-acme-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-ahcp-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-dockerman-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-eqos-zh-cn=y
-          CONFIG_PACKAGE_luci-i18n-mail-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-netdata-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-oaf-zh-cn=y
           CONFIG_PACKAGE_luci-i18n-omcproxy-zh-cn=y
@@ -240,8 +233,6 @@ jobs:
           CONFIG_PACKAGE_luci-proto-ipv6=y
           # CONFIG_PACKAGE_luci-proto-wireguard is not set
           CONFIG_PACKAGE_mount-utils=y
-          CONFIG_PACKAGE_msmtp=y
-          CONFIG_PACKAGE_msmtp-mta=y
           CONFIG_PACKAGE_netdata=y
           CONFIG_PACKAGE_odhcp6c=y
           CONFIG_PACKAGE_odhcp6c_ext_cer_id=0
@@ -249,6 +240,7 @@ jobs:
           CONFIG_PACKAGE_odhcpd_ipv6only_ext_cer_id=0
           CONFIG_PACKAGE_omcproxy=y
           CONFIG_PACKAGE_qos-scripts=y
+          CONFIG_PACKAGE_rpcd-mod-iwinfo=y
           CONFIG_PACKAGE_rpcd-mod-rpcsys=y
           CONFIG_PACKAGE_rrdtool1=y
           CONFIG_PACKAGE_ruby=y
@@ -276,12 +268,11 @@ jobs:
           CONFIG_PACKAGE_watchcat=y
           # CONFIG_PACKAGE_wireguard-tools is not set
           CONFIG_PACKAGE_wireless-regdb=y
-          CONFIG_PACKAGE_wireless-tools=y
           # CONFIG_PACKAGE_wol is not set
           CONFIG_PACKAGE_wpad-basic=y
           # CONFIG_PACKAGE_zerotier is not set
-          CONFIG_TARGET_KERNEL_PARTSIZE=128
-          CONFIG_TARGET_ROOTFS_PARTSIZE=2048
+          CONFIG_TARGET_KERNEL_PARTSIZE=256
+          CONFIG_TARGET_ROOTFS_PARTSIZE=4096
           CONFIG_TARGET_ROOTFS_TARGZ=y
           # CONFIG_VMDK_IMAGES is not set
           CONFIG_WPA_MBO_SUPPORT=y
