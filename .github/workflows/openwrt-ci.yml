@@ -1,15 +1,8 @@
-# 
-# <https://github.com/KFERMercer/OpenWrt-CI>
-#
-# Copyright (C) 2019 P3TERX
-#
-# Copyright (C) 2020 KFERMercer
-#
 name: OpenWrt-CI
 
 on:
-  schedule:
-    - cron: 0 20 * * *
+  push:
+    branches: [ dros-20230609 ]
 
 permissions:
   contents: read
@@ -40,16 +33,35 @@ jobs:
           sudo -E timedatectl set-timezone "Asia/Shanghai"
 
       - name: Checkout OpenWrt
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: dros-20230609
 
       - name: Update feeds
         run: |
-          sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
+          sed -i "/luci/i\src-git mel3c https://github.com/mel3c/openwrt-packages" feeds.conf.default
+
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+          sed -i "s/luci-theme-bootstrap/luci-theme-infinityfreedom/g" feeds/luci/collections/luci/Makefile
+          sed -i 's/192.168.1.1/192.168.28.1/g' package/base-files/files/bin/config_generate
+          sed -i '/uci commit system/i\uci set system.@system[0].hostname='dros'' package/lean/default-settings/files/zzz-default-settings
+          sed -i "s/OpenWrt /Mel3c Build $(TZ=UTC-8 date "+%Y.%m.%d") /g" package/lean/default-settings/files/zzz-default-settings
+
+          # fix hostapd compile failed
+          sed -i '/TARGET_LDFLAGS += -lubox -lubus/i\TARGET_CFLAGS += -ffunction-sections -fdata-sections -flto' package/network/services/hostapd/Makefile
+          sed -i '/TARGET_LDFLAGS += -lubox -lubus/i\TARGET_LDFLAGS += -Wl,--gc-sections -flto=jobserver -fuse-linker-plugin' package/network/services/hostapd/Makefile
+
+          # update netdata v1.33.1 monitor support https
+          sed -i '/disable-https/d' feeds/packages/admin/netdata/Makefile
+          sed -i '/DEPENDS/s/$/ +libopenssl/' feeds/packages/admin/netdata/Makefile
+
       - name: Generate configuration file
-        run: make defconfig
+        run: |
+          rm -f ./.config*
+          cp custom-config ./.config
+          make defconfig
 
       - name: Download packages
         run: make download -j16
@@ -75,19 +87,19 @@ jobs:
           cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
 
       - name: Upload buildinfo
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_buildinfo
           path: ./artifact/buildinfo/
 
       - name: Upload package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_package
           path: ./artifact/package/
 
       - name: Upload firmware
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: OpenWrt_firmware
           path: ./bin/targets/
