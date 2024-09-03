@@ -141,8 +141,11 @@ ifneq ($(LOCAL_TYPE),hostapd)
   endif
 endif
 
-DRV_DEPENDS:=+PACKAGE_kmod-cfg80211:libnl-tiny
+ifeq ($(LOCAL_TYPE),supplicant)
+    DRIVER_MAKEOPTS += CONFIG_AP=y
+endif
 
+DRV_DEPENDS:=+PACKAGE_kmod-cfg80211:libnl-tiny
 
 define Package/hostapd/Default
   SECTION:=net
@@ -587,8 +590,6 @@ TARGET_CPPFLAGS := \
 	-D_GNU_SOURCE \
 	$(if $(CONFIG_WPA_MSG_MIN_PRIORITY),-DCONFIG_MSG_MIN_PRIORITY=$(CONFIG_WPA_MSG_MIN_PRIORITY))
 
-TARGET_CFLAGS += -ffunction-sections -fdata-sections -flto
-TARGET_LDFLAGS += -Wl,--gc-sections -flto=jobserver -fuse-linker-plugin
 TARGET_LDFLAGS += -lubox -lubus
 
 ifdef CONFIG_PACKAGE_kmod-cfg80211
