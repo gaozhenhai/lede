@@ -40,6 +40,8 @@ jobs:
       - name: Update feeds
         run: |
           sed -i "/luci/i\src-git mel3c https://github.com/mel3c/openwrt-packages" feeds.conf.default
+          sed -i '1s/coolsnowwolf\/packages/mel3c\/packages;20240825/' feeds.conf.default
+          sed -i 's/coolsnowwolf\/luci/mel3c\/luci;20240630/g' feeds.conf.default
 
           ./scripts/feeds update -a
           ./scripts/feeds install -a
